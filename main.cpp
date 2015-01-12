@@ -9,16 +9,16 @@ int main()
 
     Personnage david("David"), goliath("Goliath");
 
-    david.afficher();
-    goliath.afficher();
+    cout << david << endl;
+    cout << goliath << endl;
 
     david.attaquer(goliath);
     goliath.attaquer(david);
     david.attaquer(goliath);
 
 
-    david.afficher();
-    goliath.afficher();
+    cout << david << endl;
+    cout << goliath << endl;
 
 
     /*if (david == goliath)

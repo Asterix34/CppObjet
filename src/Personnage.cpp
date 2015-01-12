@@ -37,10 +37,10 @@ void Personnage::recevoirDegats(int degats) {
         m_vie = 0;
 }
 
-void Personnage::afficher() const {
-    cout << m_nom << " : " << endl;
-    cout << "   vie : " << m_vie << endl;
-    cout << "   arme : " << arme.getNom() << "[" << arme.getDegats() << "]" << endl;
+void Personnage::afficher(ostream &flux) const {
+    flux << m_nom << " : " << endl;
+    flux << "   vie : " << m_vie << endl;
+    flux << "   arme : " << arme.getNom() << "[" << arme.getDegats() << "]" << endl;
 }
 
 string Personnage::getNom() const {
@@ -49,4 +49,10 @@ string Personnage::getNom() const {
 
 bool Personnage::isVivant() const {
     return m_vie > 0;
+}
+
+ostream &operator<<( ostream &flux, Personnage const &p)
+{
+    p.afficher(flux) ;
+    return flux;
 }

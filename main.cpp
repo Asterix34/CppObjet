@@ -7,7 +7,7 @@ int main()
 {
     cout << "RPG Combat" << endl;
 
-    Personnage david("David"), goliath("Goliath");
+    Personnage david("David"), goliath(david);
 
     cout << david << endl;
     cout << goliath << endl;

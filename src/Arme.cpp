@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 using namespace std;
 
 #include "Arme.h"
@@ -19,7 +20,7 @@ Arme::Arme(std::string nom, int degats) :
 
 Arme::~Arme()
 {
-    //dtor
+    cout << "Arme " << m_nom << " a ete detruite." << endl;
 }
 
 int Arme::getDegats() const {

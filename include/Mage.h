@@ -14,6 +14,7 @@ class Mage : public Personnage
         void sePresenter() const;
     protected:
     private:
+
 };
 
 #endif // MAGE_H

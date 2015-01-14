@@ -26,5 +26,6 @@ void Mage::bruler(Personnage &cible) {
 
 void Mage::sePresenter() const
 {
-    cout << "Je suis " << m_nom << ", le plus grand des mages." << endl;
+    Personnage::sePresenter();
+    cout << "Je suis le plus grand des mages." << endl;
 }

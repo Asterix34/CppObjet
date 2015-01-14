@@ -15,6 +15,9 @@ class Arme
     private:
         std::string m_nom;
         int m_degats;
+
+
+    friend std::ostream &operator<<(std::ostream &flux, Arme const &a);
 };
 
 #endif // ARME_H

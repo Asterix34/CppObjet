@@ -26,5 +26,6 @@ void Guerrier::trancher(Personnage &cible) {
 
 void Guerrier::sePresenter() const
 {
-    cout << "JE " << m_nom << " !!! JE GUERRIER !!!" << endl;
+    Personnage::sePresenter();
+    cout << "JE SUIS UN GUERRIER !!!" << endl;
 }

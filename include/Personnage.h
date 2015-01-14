@@ -26,9 +26,11 @@ class Personnage
         Arme *m_arme;
     private:
 
+    friend std::ostream &operator<<(std::ostream &flux, Personnage const &p);
+
 };
 
-std::ostream &operator<<(std::ostream &flux, Personnage const &p);
+
 
 void presenter(Personnage const &p);
 

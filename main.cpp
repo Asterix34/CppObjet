@@ -6,7 +6,55 @@ using namespace std;
 #include "Guerrier.h"
 #include "Mage.h"
 
-int main2()
+int test1();
+int test2();
+
+int main() {
+
+    enum MenuPrincipal { Quitter=0, CreerPersonnage=1, LancerJeu=2, Test1=3, Test2=4 };
+
+    int saisie = -1;
+
+    cout << "Bienvenue dans mon application console C++" << endl;
+
+    do  {
+        cout << "Veuillez saisir le numéro du menu..." << endl;
+        cout << "1. Créer un personnage" << endl;
+        cout << "2. Lancer le jeu" << endl;
+        cout << "3. Lancer test1" << endl;
+        cout << "4. Lancer test2" << endl;
+        cout << "0. Quitter" << endl;
+        cin  >> saisie;
+
+        switch (saisie) {
+            case CreerPersonnage:
+                cout << "Not implemented" << endl;
+                break;
+            case LancerJeu:
+                cout << "Not implemented" << endl;
+                break;
+            case Test1:
+                test1();
+                break;
+            case Test2:
+                test2();
+                break;
+        }
+
+    } while (saisie != Quitter);
+
+    cout << "A bientot !" << saisie << endl;
+
+}
+
+
+
+
+
+
+
+
+int test1()
 {
     cout << "RPG Combat" << endl << endl ;
 
@@ -60,7 +108,7 @@ int main2()
     return 0;
 }
 
-int main() {
+int test2() {
     cout << "RPG Combat - Collection" << endl << endl ;
 
     vector<Personnage*> liste;

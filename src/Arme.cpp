@@ -30,3 +30,10 @@ int Arme::getDegats() const {
 string Arme::getNom() const {
     return m_nom;
 }
+
+ostream &operator<<( ostream &flux, Arme const &a)
+{
+    //p.afficher(flux) ;
+    flux << a.m_nom << "[" << a.m_degats << "]" << endl;
+    return flux;
+}

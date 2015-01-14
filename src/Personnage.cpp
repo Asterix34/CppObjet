@@ -64,12 +64,15 @@ void Personnage::afficher(ostream &flux) const {
 
 void Personnage::sePresenter() const
 {
-    cout << "Je m'appelle " << m_nom << " et je suis un personnage." << endl;
+    cout << "Je m'appelle " << m_nom << ", j'ai " << m_vie << " points de vie." << endl;
 }
 
 ostream &operator<<( ostream &flux, Personnage const &p)
 {
-    p.afficher(flux) ;
+    //p.afficher(flux) ;
+    flux << p.m_nom << " : " << endl;
+    flux << "   vie : " << p.m_vie << endl;
+    flux << "   arme : " << *p.m_arme << endl;
     return flux;
 }
 

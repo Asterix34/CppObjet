@@ -35,9 +35,13 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Arme.h" />
+		<Unit filename="include/Guerrier.h" />
+		<Unit filename="include/Mage.h" />
 		<Unit filename="include/Personnage.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Arme.cpp" />
+		<Unit filename="src/Guerrier.cpp" />
+		<Unit filename="src/Mage.cpp" />
 		<Unit filename="src/Personnage.cpp" />
 		<Extensions>
 			<code_completion />

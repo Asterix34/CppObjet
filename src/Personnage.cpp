@@ -62,13 +62,32 @@ void Personnage::afficher(ostream &flux) const {
     flux << "   arme : " << m_arme->getNom() << "[" << m_arme->getDegats() << "]" << endl;
 }
 
+void Personnage::sePresenter() const
+{
+    cout << "Je m'appelle " << m_nom << " et je suis un personnage." << endl;
+}
+
 ostream &operator<<( ostream &flux, Personnage const &p)
 {
     p.afficher(flux) ;
     return flux;
 }
 
+Personnage &Personnage::operator=(Personnage const& personnageACopier) {
+    if (this != &personnageACopier) {
+        m_nom = personnageACopier.m_nom;
+        m_vie = personnageACopier.m_vie;
+        delete m_arme;
+        m_arme = new Arme(*(personnageACopier.m_arme));
+    }
+    return *this;
+}
+
 Personnage const *Personnage::getAdresse() const
 {
     return this;
+}
+
+void presenter(Personnage const &p) {
+    p.sePresenter();
 }

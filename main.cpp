@@ -9,9 +9,9 @@ using namespace std;
 #include "Objet.h"
 
 // prototpyes du main |TODO: classer dans des classes
-int test1();
+/*int test1();
 int test2();
-int test3();
+int test3();*/
 void creerPersonnage();
 void lancerJeu();
 
@@ -44,7 +44,7 @@ int main() {
             case LancerJeu:
                 lancerJeu();
                 break;
-            case Test1:
+            /*case Test1:
                 test1();
                 break;
             case Test2:
@@ -52,7 +52,7 @@ int main() {
                 break;
             case Test3:
                 test3();
-                break;
+                break;*/
         }
 
     } while (saisie != Quitter);
@@ -100,7 +100,7 @@ void lancerJeu() {
 
     cout << "Le jeu est termine..." << endl;
 }
-
+/*
 int test1()
 {
     cout << "RPG Combat" << endl << endl ;
@@ -127,8 +127,8 @@ int test1()
     Mage gandalf("Gandalf");
 
 
-/*    cout << david << " ref: " << &david << endl;
-    cout << goliath << " ref: " << &goliath << endl;*/
+    //cout << david << " ref: " << &david << endl;
+    //cout << goliath << " ref: " << &goliath << endl;
 
     cout << endl << "Presentation objet.sePresenter" << endl;
     david.sePresenter();
@@ -149,8 +149,8 @@ int test1()
     cout << gandalf << endl;
 
 
-    /*if (david == goliath)
-        cout << "David == Goliath" << endl;*/
+    //if (david == goliath)
+    //  cout << "David == Goliath" << endl;
 
     return 0;
 }
@@ -186,3 +186,4 @@ int test3() {
 
     return 0;
 }
+*/

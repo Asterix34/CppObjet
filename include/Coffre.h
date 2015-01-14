@@ -11,12 +11,15 @@ class Coffre
         Coffre();
         Coffre(unsigned int nbMax);
         virtual ~Coffre();
-        void ouvrir();
-        void ajouterObjet(Objet* o);
-        std::vector<Objet*> m_objets;
+        void ouvrir(); // permet d'ouvrir un coffre pour parcourir les objets
+        void ajouterObjet(Objet* o); // ajoute un objet au coffre
+        void enleveObjet(Objet* o);
+        std::vector<Objet*> m_objets; // liste d'objets TODO : privé
     protected:
         //std::vector<Objet*> m_objets;
     private:
+
+    friend std::ostream &operator<<( std::ostream &flux, Coffre const &c);
 };
 
 #endif // COFFRE_H

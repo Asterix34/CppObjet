@@ -27,3 +27,8 @@ string Objet::getNom() const {
 Objet* Objet::getRandomObjet() {
     return new Objet("Random Objet");
 }
+
+void menuAction() {
+// TODO remplir méthode
+// TODO créer classe menu contextuel
+}

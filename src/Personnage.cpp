@@ -56,11 +56,11 @@ bool Personnage::isVivant() const {
     return m_vie > 0;
 }
 
-void Personnage::afficher(ostream &flux) const {
+/*void Personnage::afficher(ostream &flux) const {
     flux << m_nom << " : " << endl;
     flux << "   vie : " << m_vie << endl;
     flux << "   arme : " << m_arme->getNom() << "[" << m_arme->getDegats() << "]" << endl;
-}
+}*/
 
 void Personnage::sePresenter() const
 {
@@ -91,10 +91,6 @@ Personnage const *Personnage::getAdresse() const
     return this;
 }
 
-void presenter(Personnage const &p) {
-    p.sePresenter();
-}
-
 void Personnage::prendreObjet(Objet *o)
 {
     m_coffre.ajouterObjet(o);
@@ -116,9 +112,7 @@ void Personnage::ouvrirInventaire()
 
     do  {
         cout << "Veuillez saisir le numéro de l'objet a detruire..." << endl;
-        for (unsigned int i=0; i<m_coffre.m_objets.size(); i++) {
-            cout << i+1 <<". " << m_coffre.m_objets[i]->getNom() << endl;
-        }
+        cout << m_coffre << endl;
 
         cout << "0. Quitter" << endl;
         cin  >> saisie;

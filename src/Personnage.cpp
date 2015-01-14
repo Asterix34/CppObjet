@@ -94,3 +94,39 @@ Personnage const *Personnage::getAdresse() const
 void presenter(Personnage const &p) {
     p.sePresenter();
 }
+
+void Personnage::prendreObjet(Objet *o)
+{
+    m_coffre.ajouterObjet(o);
+}
+
+void Personnage::detruireObjet(Objet *o)
+{
+    delete o;
+    o = 0;
+}
+
+void Personnage::ouvrirInventaire()
+{
+    enum MenuCoffre { Quitter=0 };
+
+    int saisie = -1;
+
+    cout << "Vous avez ouvert votre inventaire" << endl;
+
+    do  {
+        cout << "Veuillez saisir le numéro de l'objet a detruire..." << endl;
+        for (unsigned int i=0; i<m_coffre.m_objets.size(); i++) {
+            cout << i+1 <<". " << m_coffre.m_objets[i]->getNom() << endl;
+        }
+
+        cout << "0. Quitter" << endl;
+        cin  >> saisie;
+        if (saisie>0&&saisie<=m_coffre.m_objets.size()) {
+            detruireObjet(m_coffre.m_objets[saisie-1]);
+            m_coffre.m_objets.erase(m_coffre.m_objets.begin()+saisie-1);
+        }
+
+    } while (saisie != Quitter);
+}
+

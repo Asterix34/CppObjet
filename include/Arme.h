@@ -1,9 +1,11 @@
 #ifndef ARME_H
 #define ARME_H
 
+#include <Objet.h>
+
 #include <string>
 
-class Arme
+class Arme : public Objet
 {
     public:
         Arme();
@@ -13,7 +15,6 @@ class Arme
         std::string getNom() const;
     protected:
     private:
-        std::string m_nom;
         int m_degats;
 
 

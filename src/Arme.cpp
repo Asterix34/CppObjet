@@ -5,14 +5,14 @@ using namespace std;
 #include "Arme.h"
 
 Arme::Arme() :
-    m_nom("Vieille epee pourrie"),
-    m_degats(5)
+    Objet("Baton"),
+    m_degats(1)
 {
     //ctor
 }
 
 Arme::Arme(std::string nom, int degats) :
-    m_nom(nom),
+    Objet(nom),
     m_degats(degats)
 {
     //ctor

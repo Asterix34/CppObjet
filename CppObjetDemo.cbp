@@ -8,13 +8,18 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/CppObjetDemo" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="lib/libtcod-1.6.0" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />
+					<Add directory="lib/libtcod-1.6.0/include" />
 				</Compiler>
+				<Linker>
+					<Add library="lib\libtcod-1.6.0\lib\libtcod-mingw-debug.a" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/CppObjetDemo" prefix_auto="1" extension_auto="1" />
@@ -35,14 +40,20 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Arme.h" />
+		<Unit filename="include/Coffre.h" />
 		<Unit filename="include/Guerrier.h" />
 		<Unit filename="include/Mage.h" />
+		<Unit filename="include/Objet.h" />
 		<Unit filename="include/Personnage.h" />
+		<Unit filename="include/Potion.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Arme.cpp" />
+		<Unit filename="src/Coffre.cpp" />
 		<Unit filename="src/Guerrier.cpp" />
 		<Unit filename="src/Mage.cpp" />
+		<Unit filename="src/Objet.cpp" />
 		<Unit filename="src/Personnage.cpp" />
+		<Unit filename="src/Potion.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

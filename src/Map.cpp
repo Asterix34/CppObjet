@@ -28,7 +28,7 @@ void Map::setWall(int x, int y) {
     tiles[x+y*width].isWall = true;
 }
 
-// the render - pattern
+// render the map
 void Map::render() const {
     // default const for colors
     static const TCODColor darkWall(0,0,100);

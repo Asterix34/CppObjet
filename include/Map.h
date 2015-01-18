@@ -16,7 +16,7 @@ class Map
         virtual ~Map();
 
         bool isWall(int x, int y) const;
-        void render() const; // decorator pattern
+        void render() const;
 
     protected:
         // map of tiles

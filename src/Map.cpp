@@ -32,6 +32,25 @@ Map::~Map()
    delete tmap;
 }
 
+// check if a tile can be walked
+bool Map::canWalk(int x, int y) const {
+    if (isWall(x, y)) {
+        return false; // can't walk on a wall noob
+    }
+    // now parse every unit in the map, and see if one is where we try to walk
+    for (Unit **iterator = engine.units.begin();
+            iterator != engine.units.end();
+            iterator++) {
+        Unit *unit = *iterator; // remember iterator is a pointer to a pointer to a unit
+        if (unit->m_x == x && unit->m_y == y) {
+            // there is a unit here
+            return false;
+        }
+    }
+    // if everything gone good, then walk
+    return true;
+}
+
 // simple method to check if a tile is a wall
 bool Map::isWall(int x, int y) const {
     return !tmap->isWalkable(x, y); // return the boolean attribute
@@ -113,9 +132,26 @@ void Map::createRoom(int x1, int y1, int x2, int y2, bool first) {
     } else {
         // we use random lib from TCOD
         TCODRandom *rng = TCODRandom::getInstance(); // oh look a singleton
-        if ( rng->getInt(0, 0) == 0 ) { // should proc 25% chance
-            // add a NPC to the room
-            engine.units.push( new Unit((x1+x2)/2, (y1+y2)/2, 'V', TCODColor::yellow));
+        int nbMonsters = rng->getInt(0, ROOM_MAX_MONSTERS);
+        while ( nbMonsters > 0) {
+            int x = rng->getInt(x1, x2);
+            int y = rng->getInt(y1, y2);
+            if ( canWalk(x, y) ) {
+                addMonster(x, y);
+                nbMonsters--;
+            }
         }
+    }
+}
+
+void Map::addMonster(int x, int y) {
+    TCODRandom *rng = TCODRandom::getInstance();
+
+    if ( rng->getInt(0, 100) < 80 ) {
+        // create an orc (80%)
+        engine.units.push( new Unit(x, y, 'O', TCODColor::desaturatedGreen, "Orc") );
+    } else {
+        // create a troll
+        engine.units.push( new Unit(x, y, 'T', TCODColor::darkerGreen, "Troll") );
     }
 }

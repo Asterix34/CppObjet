@@ -10,6 +10,7 @@ class Engine
         TCODList<Unit *> units;
         Unit *player;
         Map *gmap;
+        enum GameStatus { STARTUP, IDLE, NEW_TURN, VICTORY, DEFEAT } gameStatus;
 
         int fovRadius;
 

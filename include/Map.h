@@ -6,6 +6,7 @@
 // some const
 const int ROOM_MIN_SIZE = 4;
 const int ROOM_MAX_SIZE = 12;
+const int ROOM_MAX_MONSTERS = 3;
 
 struct Tile {
     bool explored; // has this tile been explored ?
@@ -21,14 +22,18 @@ class Map
         Map(int width, int height);
         virtual ~Map();
 
-        bool isWall(int x, int y) const;
         void render() const;
+
+        bool isWall(int x, int y) const;
+        bool canWalk(int x, int y) const; // will check if wall and if someone in the tile
 
         // FOV management
         bool isInFov(int x, int y) const;
         bool isExplored(int x, int y) const;
         void computeFov();
 
+        // NPC management
+        void addMonster(int x, int y);
     protected:
         // map of tiles
         Tile *tiles;

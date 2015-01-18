@@ -1,12 +1,12 @@
 #include "Engine.h"
 
-Engine::Engine() : fovRadius(10), computeFov(true)
+Engine::Engine() : gameStatus(STARTUP), fovRadius(10)
 {
     // create the game window
     TCODConsole::initRoot(80,50,"libtcod C++ tutorial",false);
 
     // instantiate new pointer to unit for player
-    player = new Unit(40, 25, '@', TCODColor::white);
+    player = new Unit(40, 25, '@', TCODColor::white, "Player");
 
     // add player to the list of units
     units.push(player);
@@ -28,43 +28,42 @@ void Engine::update() {
     // var to store a key
     TCOD_key_t key;
 
+    if (gameStatus == STARTUP) gmap->computeFov();
+    gameStatus == IDLE;
+
     // check input event (event, *key, *mouse)
     TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS,&key,NULL);
 
     // game logic here
-    // check which key is pressed and change coordinates of player
-    switch(key.vk) {
-        case TCODK_UP :
-            if ( ! gmap->isWall(player->m_x,player->m_y-1)) {
-                player->m_y--;
-                computeFov=true;
-            }
-        break;
-        case TCODK_DOWN :
-            if ( ! gmap->isWall(player->m_x,player->m_y+1)) {
-                player->m_y++;
-                computeFov=true;
-            }
-        break;
-        case TCODK_LEFT :
-            if ( ! gmap->isWall(player->m_x-1,player->m_y)) {
-                player->m_x--;
-                computeFov=true;
-            }
-        break;
-        case TCODK_RIGHT :
-            if ( ! gmap->isWall(player->m_x+1,player->m_y)) {
-                player->m_x++;
-                computeFov=true;
-            }
-        break;
+    int dx=0, dy=0;
+    switch( key.vk ) {
+        case TCODK_UP: dy=-1; break;
+        case TCODK_DOWN: dy=1; break;
+        case TCODK_LEFT: dx=-1; break;
+        case TCODK_RIGHT: dx=1; break;
         default: break;
     }
-    // compute FoV if enabled
-    if ( computeFov ) {
-        gmap->computeFov();
-        computeFov = false;
+    // if there is a move, compute FoV and make new turn
+    if (dx !=0 ||dy != 0) {
+        gameStatus = NEW_TURN;
+        // only check now if move sent is valid
+        if ( player->moveOrAttack(player->m_x + dx, player->m_y + dy) ) {
+            gmap->computeFov();
+        }
     }
+
+    // logic for NEW_TURN
+    if (gameStatus == NEW_TURN) {
+        for (Unit **iterator = units.begin();
+                iterator != units.end();
+                iterator++) {
+            Unit *unit = *iterator;
+            if ( unit != player ) {
+                unit->update();
+            }
+        }
+    }
+
 }
 
 // render the current frame

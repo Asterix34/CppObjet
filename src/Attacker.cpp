@@ -17,16 +17,16 @@ void Attacker::attack(Unit *owner, Unit *target) {
         // looks like a double check here, maybe we need another method in destructibe
         if ( m_power - target->destructible->m_defense > 0 ) {
 
-            engine.gui->message(col, "%s attacks %s for %g hit points.\n",
+            engine.gui->message(col, "%s attacks %s for %g hit points.",
                    owner->m_name, target->m_name,
                    m_power - target->destructible->m_defense);
         } else {
-            engine.gui->message(col, "%s attacks %s but it has no effect!\n",
+            engine.gui->message(col, "%s attacks %s but it has no effect!",
                    owner->m_name, target->m_name);
         }
         target->destructible->takeDamage(target, m_power);
     } else {
-        engine.gui->message(col, "%s attacks %s in vain.\n",
+        engine.gui->message(col, "%s attacks %s in vain.",
                owner->m_name, target->m_name);
     }
 }

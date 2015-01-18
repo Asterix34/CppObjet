@@ -1,4 +1,5 @@
 #include "Engine.h"
+// #include <Windows.h>
 
 Engine::Engine(int screenWidth, int screenHeight) :
     screenWidth(screenWidth), screenHeight(screenHeight),
@@ -43,8 +44,10 @@ void Engine::update() {
 
     gameStatus = IDLE;
 
-    // check input event (event, *key, *mouse)
-    TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS,&lastKey,NULL);
+    // check input event (event|..., *key, *mouse)
+    TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS|TCOD_EVENT_MOUSE,&lastKey,&mouse);
+
+    //Sleep(10);
 
     // game logic here
     player->update();

@@ -14,7 +14,9 @@ class Engine
         Map *gmap;
         enum GameStatus { STARTUP, IDLE, NEW_TURN, VICTORY, DEFEAT } gameStatus;
         int fovRadius; // radius in nb of tiles for FoV
+
         TCOD_key_t lastKey; // store last key pressed
+        TCOD_mouse_t mouse;
 
         Engine(int screenWidth, int screenHeight);
         virtual ~Engine();

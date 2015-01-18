@@ -59,6 +59,10 @@ bool Map::isExplored(int x, int y) const {
 
 // check if a node has been explored
 bool Map::isInFov(int x, int y) const {
+    // add to prevent out of map numbers - for mouse
+    if ( x<0 || x>=width || y<0 || y>=height )
+        return false;
+
     if ( tmap->isInFov(x, y) ) {
         tiles[x + y*width].explored = true;
         return true;

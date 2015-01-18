@@ -65,6 +65,9 @@ void Gui::render() {
         }
     }*/
 
+    // handle mouse inspection
+    renderMouseLook();
+
     // draw GUI to game window
     TCODConsole::blit(con, 0, 0, engine.screenWidth, PANEL_HEIGHT, // from
             TCODConsole::root, 0, engine.screenHeight-PANEL_HEIGHT); // to
@@ -128,4 +131,30 @@ void Gui::message(const TCODColor &color, const char *text, ...) {
         lineBegin = lineEnd + 1;
     } while ( lineEnd );
 
+}
+
+
+void Gui::renderMouseLook() {
+    if ( !engine.gmap->isInFov( engine.mouse.cx, engine.mouse.cy ))
+        return;
+
+    /* once again, here is some C, we could use string instead */
+    char buffer[128]="";
+    bool first = true;
+
+    for (Unit **iterator=engine.units.begin(); iterator != engine.units.end(); iterator++) {
+        Unit *unit = *iterator;
+        // find actors under the mouse cursor
+        if (unit->m_x == engine.mouse.cx && unit->m_y == engine.mouse.cy) {
+            if (first) {
+                first = false;
+            } else {
+                strcat(buffer, ", ");
+            }
+            strcat(buffer, unit->m_name);
+        }
+    }
+        // display the list of actors under the mouse cursor
+    con->setDefaultForeground(TCODColor::lightGrey);
+    con->print(1,0,buffer);
 }

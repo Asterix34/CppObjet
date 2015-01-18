@@ -9,15 +9,20 @@ Engine::Engine(int screenWidth, int screenHeight) :
 
     // instantiate new pointer to unit for player
     player = new Unit(40, 25, '@', TCODColor::white, "Player");
-    player->destructible = new PlayerDestructible(30, 10, "Your cadaver"); // 30 hp and 2def
+    player->destructible = new PlayerDestructible(30, 2, "Your cadaver"); // 30 hp and 2def
     player->attacker = new Attacker(5); // starting damage 5
     player->ai = new PlayerAi();
 
     // add player to the list of units
     units.push(player);
 
-    // allocate new map
+    // allocate new map and the gui
     gmap = new Map(80, 45);
+    gui = new Gui();
+
+    gui->message(TCODColor::white,
+        "Welcome stranger!\nPrepare to perish in the Tombs of the Ancient Kings.");
+
 }
 
 Engine::~Engine()
@@ -26,6 +31,7 @@ Engine::~Engine()
     units.clearAndDelete();
     // for every new we need a delete
     delete gmap;
+    delete gui;
 }
 
 // every frame you play
@@ -78,9 +84,7 @@ void Engine::render() {
     // has this been done already in unit ?
     player->render();
 
-    // this is my first GUI
-    TCODConsole::root->print(1, screenHeight-2, "HP : %d/%d",
-        (int)player->destructible->m_hp, (int)player->destructible->m_maxHp);
+    gui->render();
 }
 
 void Engine::sendToBack(Unit *unit) {

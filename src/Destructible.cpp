@@ -49,12 +49,12 @@ void Destructible::die(Unit *owner) {
 }
 
 void MonsterDestructible::die(Unit *owner) {
-    printf("%s is dead...\n", owner->m_name);
+    engine.gui->message(TCODColor::yellow, "%s is dead...\n", owner->m_name);
     Destructible::die(owner);
 }
 
 void PlayerDestructible::die(Unit *owner) {
-    printf("You died !");
+    engine.gui->message(TCODColor::red, "You died !\n");
     Destructible::die(owner);
     // notify engine that game is over
     engine.gameStatus = Engine::DEFEAT;

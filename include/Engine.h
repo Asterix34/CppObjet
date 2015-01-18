@@ -7,6 +7,8 @@ class Engine
 {
     public:
         int screenWidth, screenHeight;
+        Gui *gui; // pointer allow easier initialization of dependent values
+
         TCODList<Unit *> units; // list of units - dead or alive
         Unit *player;
         Map *gmap;

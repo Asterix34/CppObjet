@@ -53,7 +53,7 @@ bool PlayerAi::moveOrAttack(Unit *owner, int x, int y) {
         Unit *unit = *iterator;
         if ( unit->destructible && unit->destructible->isDead()
                 && unit->m_x == x && unit->m_y == y ) {
-            printf("There's a %s here.\n", unit->m_name);
+            engine.gui->message(TCODColor::white, "There's a %s here.\n", unit->m_name);
         }
     }
 

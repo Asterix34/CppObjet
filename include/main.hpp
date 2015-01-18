@@ -12,12 +12,14 @@ class Ai;
 class Attacker;
 class Map;
 class Destructible;
+class Gui;
 
 #include "Destructible.h"
 #include "Attacker.h"
 #include "Ai.h"
 #include "Unit.h"
 #include "Map.h"
+#include "Gui.h"
 #include "Engine.h"
 
 #endif // MAIN_HPP_INCLUDED

@@ -29,5 +29,12 @@ class Healer : public Pickable
     private:
 };
 
+class LightningBolt : public Pickable {
+    public:
+        float range, damage;
+        LightningBolt(float range, float damage);
+        bool use(Unit *owner, Unit *wearer);
+};
+
 
 #endif // PICKABLE_H

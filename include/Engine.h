@@ -25,6 +25,8 @@ class Engine
         void render();
 
         void sendToBack(Unit *unit);
+
+        Unit *getClosestMonster(int x, int y, float range) const;
     protected:
     private:
         bool computeFov; // expensive ressource wise so do it only when player moves

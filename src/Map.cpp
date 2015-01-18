@@ -12,7 +12,7 @@ Map::Map(int width, int height) : width(width), height(height)
 
     // start generation - (TCODRandom *randomizer, int nb, int minHSize,
     //                      int minVSize, float maxHRatio, float maxVRatio);
-    bsp.splitRecursive(NULL, 8, ROOM_MAX_SIZE, ROOM_MAX_SIZE, 1.5f, 1.5f);
+    bsp.splitRecursive(NULL, 16, ROOM_MAX_SIZE, ROOM_MAX_SIZE, 1.5f, 1.5f);
 
     // create a listener
     BspListener listener(*this);
@@ -177,11 +177,21 @@ void Map::addMonster(int x, int y) {
 }
 
 void Map::addItem(int x, int y) {
-    //TCODRandom *rng = TCODRandom::getInstance();
+    TCODRandom *rng = TCODRandom::getInstance();
 
-    Unit *healthPotion = new Unit(x, y, '!', TCODColor::violet, "Health Potion");
-    healthPotion->blockMovement = false;
-    healthPotion->pickable = new Healer(10);
+    int dice = rng->getInt(0, 100);
+    Unit *item;
 
-    engine.units.push(healthPotion);
+    if ( dice < 70 ) {
+        // create health potion
+        item = new Unit(x, y, '!', TCODColor::violet, "Health Potion");
+        item->blockMovement = false;
+        item->pickable = new Healer(10);
+    } else {
+        // create lightning scroll
+        item = new Unit(x, y, '#', TCODColor::lightBlue, "Scroll of Lightning Bolt");
+        item->blockMovement = false;
+        item->pickable = new LightningBolt(5,20);
+    }
+    engine.units.push(item);
 }

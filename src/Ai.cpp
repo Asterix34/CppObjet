@@ -79,8 +79,6 @@ void PlayerAi::handleActionKey(Unit *owner, int ascii) {
                 if (unit->pickable && unit->m_x == owner->m_x && unit->m_y == owner->m_y ) {
                     // item is pickable and in the same tile
                     if (unit->pickable->pick(unit, owner)) {
-                        engine.gui->message(TCODColor::lightGrey, "You pick the %s.", unit->m_name);
-                        engine.gameStatus=Engine::NEW_TURN; // will let a turn pass for each item
                         found = true;
                         break; // we have to break the loop because pick will remove an item from the list
                     } else if ( !found ) {

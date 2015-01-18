@@ -96,3 +96,24 @@ void Engine::sendToBack(Unit *unit) {
     units.remove(unit);
     units.insertBefore(unit, 0);
 }
+
+Unit *Engine::getClosestMonster(int x, int y, float range) const {
+    Unit *closest = NULL;
+    float bestDistance = 1E6f;
+
+    // loop all units
+    for (Unit **it = units.begin();
+            it != units.end(); it++) {
+        Unit *unit = *it;
+        if ( unit != player && unit->destructible
+             && !unit->destructible->isDead() ) {
+            float distance = unit->getDistance(x, y);
+            if ( distance < bestDistance
+                    && (distance <= range || range == 0.0f )) {
+                bestDistance = distance;
+                closest = unit;
+            }
+        }
+    }
+    return closest;
+}

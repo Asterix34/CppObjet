@@ -25,7 +25,13 @@ class Unit
 
         void update();
 
+
+        // combat management
+        float getDistance(int cx, int cy) const;
     protected:
+
+
+
     private:
 };
 

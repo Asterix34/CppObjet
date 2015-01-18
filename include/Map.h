@@ -4,8 +4,8 @@
 #include "main.hpp"
 
 // some const
-const int ROOM_MIN_SIZE = 4;
-const int ROOM_MAX_SIZE = 12;
+const int ROOM_MIN_SIZE = 6;
+const int ROOM_MAX_SIZE = 10;
 const int ROOM_MAX_MONSTERS = 3;
 const int ROOM_MAX_ITEMS = 2;
 

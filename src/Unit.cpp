@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include <math.h>
 
 Unit::Unit()
 {
@@ -33,4 +34,10 @@ void Unit::render() const {
 
 void Unit::update() {
     if ( ai ) ai->update(this); // delegate with composition
+}
+
+float Unit::getDistance(int cx, int cy) const {
+    int dx=m_x-cx;
+    int dy=m_y-cy;
+    return sqrtf(dx*dx+dy*dy);
 }

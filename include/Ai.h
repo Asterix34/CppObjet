@@ -20,6 +20,7 @@ class MonsterAi : public Ai {
     public:
         void update(Unit *owner);
     protected:
+        int moveCount;
         void moveOrAttack(Unit *owner, int targetX, int targetY);
 };
 

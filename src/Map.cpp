@@ -1,7 +1,6 @@
 #include "Map.h"
 #include "BspListener.h"
 
-
 Map::Map(int width, int height) : width(width), height(height)
 {
     // list of tiles in map

@@ -11,9 +11,6 @@ Engine::Engine()
     // add player to the list of units
     units.push(player);
 
-    // add another random unit
-    units.push(new Unit(60, 13, 'V', TCODColor::yellow));
-
     // allocate new map
     gmap = new Map(80, 45);
 }

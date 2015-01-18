@@ -1,9 +1,16 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "libtcod.hpp"
+
+
+// some const
+const int ROOM_MINH_SIZE = 12;
+const int ROOM_MINV_SIZE = 4;
+
 struct Tile {
     bool isWall; // is this tile a wall ?
-    Tile() : isWall(false) {} // default ctor
+    Tile() : isWall(true) {} // default ctor - now all walls
 };
 
 class Map
@@ -22,7 +29,11 @@ class Map
         // map of tiles
         Tile *tiles;
 
-        void setWall(int x, int y); // add a new wall
+        void dig(int x1, int y1, int x2, int y2); // can dig rooms
+        void createRoom(int x1, int y1, int x2, int y2, bool first, int nb);
+
+        // BSP is Binary Space Partition, it generate tree like a dungeon with rooms
+        friend class BspListener;
     private:
 };
 

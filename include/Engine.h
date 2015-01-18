@@ -1,8 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "libtcod.hpp"
-
 #include "Unit.h"
 #include "Map.h"
 

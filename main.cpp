@@ -18,6 +18,7 @@ Personnage *joueur;
 Engine engine;
 
 
+
 int main() {
     /* legacy block */
     joueur = new Personnage("Asterix");

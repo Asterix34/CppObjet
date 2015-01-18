@@ -14,6 +14,8 @@ class PlayerAi : public Ai {
         void update(Unit *owner);
     protected:
         bool moveOrAttack(Unit *owner, int targetX, int targetY);
+        void handleActionKey(Unit *owner, int ascii);
+        Unit *chooseFromInventory(Unit *owner);
 };
 
 class MonsterAi : public Ai {

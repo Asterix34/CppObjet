@@ -13,6 +13,7 @@ void PlayerAi::update(Unit *owner) {
         case TCODK_DOWN: dy=1; break;
         case TCODK_LEFT: dx=-1; break;
         case TCODK_RIGHT: dx=1; break;
+        case TCODK_CHAR: handleActionKey(owner, engine.lastKey.c); break;
         default: break;
     }
     // if there is a move, compute FoV and make new turn
@@ -51,8 +52,12 @@ bool PlayerAi::moveOrAttack(Unit *owner, int x, int y) {
             iterator != engine.units.end();
             iterator++) {
         Unit *unit = *iterator;
-        if ( unit->destructible && unit->destructible->isDead()
-                && unit->m_x == x && unit->m_y == y ) {
+        if ( (
+              ( unit->destructible && unit->destructible->isDead() )
+                || unit->pickable
+             )
+             && unit->m_x == x && unit->m_y == y
+            ) {
             engine.gui->message(TCODColor::white, "There's a %s here.", unit->m_name);
         }
     }
@@ -60,6 +65,88 @@ bool PlayerAi::moveOrAttack(Unit *owner, int x, int y) {
     owner->m_x = x;
     owner->m_y = y;
     return true; // player moved
+}
+
+void PlayerAi::handleActionKey(Unit *owner, int ascii) {
+    // this method handle every non-movement key
+    switch(ascii) {
+    case 'g': // pickup item
+        {
+            bool found=false;
+            for (Unit **iterator = engine.units.begin();
+                    iterator != engine.units.end(); iterator++) {
+                Unit *unit = *iterator;
+                if (unit->pickable && unit->m_x == owner->m_x && unit->m_y == owner->m_y ) {
+                    // item is pickable and in the same tile
+                    if (unit->pickable->pick(unit, owner)) {
+                        engine.gui->message(TCODColor::lightGrey, "You pick the %s.", unit->m_name);
+                        engine.gameStatus=Engine::NEW_TURN; // will let a turn pass for each item
+                        found = true;
+                        break; // we have to break the loop because pick will remove an item from the list
+                    } else if ( !found ) {
+                        engine.gui->message(TCODColor::lightRed, "Your inventory is full.");
+                    }
+                    found = true;
+                }
+            }
+            if ( !found ) {
+                engine.gui->message(TCODColor::lightGrey, "There's nothing here.");
+            }
+        }
+        break;
+    case 'i': // open inventory
+        {
+            Unit *unit = chooseFromInventory(owner);
+            if ( unit ) {
+                unit->pickable->use(unit, owner);
+                engine.gameStatus = Engine::NEW_TURN; // use a turn to use too
+            }
+        }
+        break;
+
+    }
+}
+
+Unit *PlayerAi::chooseFromInventory(Unit *owner) {
+    static const int INVENTORY_WIDTH=50;
+    static const int INVENTORY_HEIGHT=12;
+    static TCODConsole con(INVENTORY_WIDTH, INVENTORY_HEIGHT);
+
+    // display the inventory frame
+    con.setDefaultBackground(TCODColor(200, 180, 50));
+    con.printFrame(0, 0, INVENTORY_WIDTH, INVENTORY_HEIGHT, true,
+                   TCOD_BKGND_DEFAULT, "inventory");
+
+    // display the items with their keyboard shortcut
+    con.setDefaultForeground(TCODColor::white);
+    int shortcut='a'; // shortcuts will be a, b, c ...
+    int y=1;
+    for (Unit **it=owner->container->inventory.begin();
+            it != owner->container->inventory.end(); it++) {
+        Unit *unit = *it;
+        con.print(2, y, "(%c) %s", shortcut, unit->m_name);
+        y++;
+        shortcut++;
+    }
+
+    // now we blit the inventory console to the root
+    TCODConsole::blit(&con, 0, 0, INVENTORY_WIDTH, INVENTORY_HEIGHT,
+            TCODConsole::root, engine.screenWidth/2 - INVENTORY_WIDTH/2,
+            engine.screenHeight/2 - INVENTORY_HEIGHT/2);
+    TCODConsole::flush();
+
+    // now we wait for the player to press a key
+    TCOD_key_t key;
+    TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+
+    // let's wait for a CHAR value now [a-Z]
+    if ( key.vk == TCODK_CHAR) {
+        int unitIndex = key.c - 'a'; // chars are ints !
+
+        if ( unitIndex >= 0 && unitIndex < owner->container->inventory.size() )
+            return owner->container->inventory.get(unitIndex);
+    }
+    return NULL;
 }
 
 /* Monster AI */

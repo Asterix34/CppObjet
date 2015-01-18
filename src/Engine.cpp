@@ -13,6 +13,7 @@ Engine::Engine(int screenWidth, int screenHeight) :
     player->destructible = new PlayerDestructible(30, 2, "Your cadaver"); // 30 hp and 2def
     player->attacker = new Attacker(5); // starting damage 5
     player->ai = new PlayerAi();
+    player->container = new Container(10);
 
     // add player to the list of units
     units.push(player);

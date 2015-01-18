@@ -4,11 +4,6 @@ using namespace std;
 // external libs
 #include "main.hpp"
 
-/* legacy block */
-#include "Personnage.h"
-#include "Objet.h"
-Personnage *joueur;
-/* end legacy block */
 
 // global engine (called as extern in Engine.h)
 Engine engine(80, 50); // width, height
@@ -16,10 +11,6 @@ Engine engine(80, 50); // width, height
 
 
 int main() {
-    /* legacy block */
-    joueur = new Personnage("Asterix");
-    /* end legacy block */
-
     // game loop
     while ( !TCODConsole::isWindowClosed() ) {
         engine.update();

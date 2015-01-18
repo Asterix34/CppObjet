@@ -7,6 +7,7 @@
 const int ROOM_MIN_SIZE = 4;
 const int ROOM_MAX_SIZE = 12;
 const int ROOM_MAX_MONSTERS = 3;
+const int ROOM_MAX_ITEMS = 2;
 
 struct Tile {
     bool explored; // has this tile been explored ?
@@ -34,6 +35,10 @@ class Map
 
         // NPC management
         void addMonster(int x, int y);
+
+        // items management
+        void addItem(int x, int y);
+        // void addContainer(int x, int y); TODO
     protected:
         // map of tiles
         Tile *tiles;

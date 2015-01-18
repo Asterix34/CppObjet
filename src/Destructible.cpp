@@ -37,6 +37,15 @@ float Destructible::takeDamage(Unit *owner, float damage) {
     return damage;
 }
 
+float Destructible::heal(float amount) {
+    m_hp += amount;
+    if (m_hp > m_maxHp ) {
+        amount -= m_hp-m_maxHp;
+        m_hp = m_maxHp;
+    }
+    return amount;
+}
+
 void Destructible::die(Unit *owner) {
     // transform into a corpse
     owner->m_icon = '%';

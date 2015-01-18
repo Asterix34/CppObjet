@@ -1,9 +1,7 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include <stdio.h>
 #include "main.hpp"
-
 
 class Unit
 {
@@ -20,6 +18,8 @@ class Unit
         Attacker *attacker; // something that deals damages
         Destructible *destructible; // something that can be damaged
         Ai *ai; // something self updating
+        Pickable *pickable; // something that can be picked and used
+        Container *container; // something that can contain units
 
         void render() const; // method to send the unit to output
 

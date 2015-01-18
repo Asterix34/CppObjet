@@ -141,6 +141,17 @@ void Map::createRoom(int x1, int y1, int x2, int y2, bool first) {
                 nbMonsters--;
             }
         }
+
+        // add items
+        int nbItems=rng->getInt(0,ROOM_MAX_ITEMS);
+        while (nbItems > 0) {
+            int x=rng->getInt(x1,x2);
+            int y=rng->getInt(y1,y2);
+            if ( canWalk(x,y) ) {
+                addItem(x,y);
+            }
+            nbItems--;
+        }
     }
 }
 
@@ -163,4 +174,14 @@ void Map::addMonster(int x, int y) {
         monster->ai = new MonsterAi();
     }
     engine.units.push( monster );
+}
+
+void Map::addItem(int x, int y) {
+    //TCODRandom *rng = TCODRandom::getInstance();
+
+    Unit *healthPotion = new Unit(x, y, '!', TCODColor::violet, "Health Potion");
+    healthPotion->blockMovement = false;
+    healthPotion->pickable = new Healer(10);
+
+    engine.units.push(healthPotion);
 }

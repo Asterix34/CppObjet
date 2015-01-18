@@ -2,24 +2,27 @@
 #define MAIN_HPP_INCLUDED
 
 
-// external libs
 #include "libtcod.hpp"
-
 // so to let it compile we need to inform the compiler a class Unit will exist
 // i know this is a prototype in a prototype but blame C++
 class Unit;
-class Ai;
-class Attacker;
-class Map;
 class Destructible;
+class Attacker;
+class Ai;
+class Pickable;
+class Container;
+class Map;
 class Gui;
 
 #include "Destructible.h"
 #include "Attacker.h"
 #include "Ai.h"
+#include "Pickable.h"
+#include "Container.h"
 #include "Unit.h"
 #include "Map.h"
 #include "Gui.h"
 #include "Engine.h"
+
 
 #endif // MAIN_HPP_INCLUDED

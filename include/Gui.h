@@ -2,6 +2,7 @@
 #define GUI_H
 
 #include "main.hpp"
+#include <stdio.h>
 
 class Gui
 {

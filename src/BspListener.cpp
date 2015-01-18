@@ -21,7 +21,7 @@ bool BspListener::visitNode(TCODBsp *node, void *userData) {
         x = rng->getInt(node->x+1, node->x + node->w - w-1); // get random pos
         y = rng->getInt(node->y+1, node->y + node->h - h-1); // from pos to max
 
-        printf("[%d] : X=%d | Y=%d | W=%d | H=%d\n", roomNum, x, y, w, h);
+        //printf("[%d] : X=%d | Y=%d | W=%d | H=%d\n", roomNum, x, y, w, h);
 
         // this prevent the out of range
         bool error = false;
@@ -38,10 +38,10 @@ bool BspListener::visitNode(TCODBsp *node, void *userData) {
             h = gmap.height - y - 1; error = true;
         }
 
-        if (error) {
+        /*if (error) {
             printf("ERROR out of range, preventing...");
             printf("[%d] : X=%d | Y=%d | W=%d | H=%d\n", roomNum, x, y, w, h);
-        }
+        }*/
 
         // now that x,y,w,h guaranteed to be in range, make room
         gmap.createRoom(x, y, x+w-1, y+h-1, roomNum==0);

@@ -1,8 +1,5 @@
 #include "Map.h"
 #include "BspListener.h"
-#include "Engine.h"
-
-
 
 
 Map::Map(int width, int height) : width(width), height(height)
@@ -42,8 +39,8 @@ bool Map::canWalk(int x, int y) const {
             iterator != engine.units.end();
             iterator++) {
         Unit *unit = *iterator; // remember iterator is a pointer to a pointer to a unit
-        if (unit->m_x == x && unit->m_y == y) {
-            // there is a unit here
+        if ( unit->blockMovement && unit->m_x == x && unit->m_y == y) {
+            // there is a unit here that block movement
             return false;
         }
     }
@@ -147,11 +144,20 @@ void Map::createRoom(int x1, int y1, int x2, int y2, bool first) {
 void Map::addMonster(int x, int y) {
     TCODRandom *rng = TCODRandom::getInstance();
 
+    Unit *monster;
+
     if ( rng->getInt(0, 100) < 80 ) {
         // create an orc (80%)
-        engine.units.push( new Unit(x, y, 'O', TCODColor::desaturatedGreen, "Orc") );
+        monster = new Unit(x, y, 'O', TCODColor::desaturatedGreen, "Orc");
+        monster->destructible = new MonsterDestructible(10, 0, "Dead orc");
+        monster->attacker = new Attacker(3);
+        monster->ai = new MonsterAi();
     } else {
         // create a troll
-        engine.units.push( new Unit(x, y, 'T', TCODColor::darkerGreen, "Troll") );
+        monster = new Unit(x, y, 'T', TCODColor::darkerGreen, "Troll");
+        monster->destructible = new MonsterDestructible(16, 1, "Troll carcass");
+        monster->attacker = new Attacker(4);
+        monster->ai = new MonsterAi();
     }
+    engine.units.push( monster );
 }

@@ -2,8 +2,7 @@
 #define UNIT_H
 
 #include <stdio.h>
-
-#include "libtcod.hpp"
+#include "main.hpp"
 
 
 class Unit
@@ -17,10 +16,14 @@ class Unit
         TCODColor m_color; // color
         const char *m_name; // name of unit - can't be changed after instanciation
 
+        bool blockMovement; // can we walk on this
+        Attacker *attacker; // something that deals damages
+        Destructible *destructible; // something that can be damaged
+        Ai *ai; // something self updating
+
         void render() const; // method to send the unit to output
 
         void update();
-        bool moveOrAttack(int x, int y);
 
     protected:
     private:

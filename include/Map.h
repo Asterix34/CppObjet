@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "libtcod.hpp"
+#include "main.hpp"
 
 // some const
 const int ROOM_MIN_SIZE = 4;

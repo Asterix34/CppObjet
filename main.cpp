@@ -2,11 +2,7 @@
 using namespace std;
 
 // external libs
-#include "libtcod.hpp"
-
-// my classes
-#include "Engine.h" // also includes Map and Unit
-
+#include "main.hpp"
 
 /* legacy block */
 #include "Personnage.h"
@@ -15,7 +11,7 @@ Personnage *joueur;
 /* end legacy block */
 
 // global engine (called as extern in Engine.h)
-Engine engine;
+Engine engine(80, 50); // width, height
 
 
 

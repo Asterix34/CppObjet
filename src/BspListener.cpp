@@ -1,5 +1,4 @@
 #include "BspListener.h"
-#include "Map.h"
 
 BspListener::BspListener(Map &gmap) :
     gmap(gmap), roomNum(0)

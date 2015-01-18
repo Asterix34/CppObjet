@@ -11,6 +11,8 @@ class Engine
         Unit *player;
         Map *gmap;
 
+        int fovRadius;
+
         Engine();
         virtual ~Engine();
 
@@ -18,6 +20,7 @@ class Engine
         void render();
     protected:
     private:
+        bool computeFov; // expensive ressource wise so do it only when player moves
 };
 
 // indicate that it has been declared somewhere else

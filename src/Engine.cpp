@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-Engine::Engine()
+Engine::Engine() : fovRadius(10), computeFov(true)
 {
     // create the game window
     TCODConsole::initRoot(80,50,"libtcod C++ tutorial",false);
@@ -32,29 +32,38 @@ void Engine::update() {
     TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS,&key,NULL);
 
     // game logic here
-    // check which key is pressed and change coordinates
+    // check which key is pressed and change coordinates of player
     switch(key.vk) {
         case TCODK_UP :
             if ( ! gmap->isWall(player->m_x,player->m_y-1)) {
                 player->m_y--;
+                computeFov=true;
             }
         break;
         case TCODK_DOWN :
             if ( ! gmap->isWall(player->m_x,player->m_y+1)) {
                 player->m_y++;
+                computeFov=true;
             }
         break;
         case TCODK_LEFT :
             if ( ! gmap->isWall(player->m_x-1,player->m_y)) {
                 player->m_x--;
+                computeFov=true;
             }
         break;
         case TCODK_RIGHT :
             if ( ! gmap->isWall(player->m_x+1,player->m_y)) {
                 player->m_x++;
+                computeFov=true;
             }
         break;
         default: break;
+    }
+    // compute FoV if enabled
+    if ( computeFov ) {
+        gmap->computeFov();
+        computeFov = false;
     }
 }
 
@@ -65,10 +74,15 @@ void Engine::render() {
     // draw the map
     gmap->render();
 
-    // draw units
+    // draw units if in FoV
     for (Unit **iterator=units.begin(); // begin returns a pointer to first elem
         // an elem is a pointer to a unit, so pointer to pointer Unit **
         iterator != units.end(); iterator++) { // keep going until end
-        (*iterator)->render(); // retrieve the unit pointer
+        Unit *unit = *iterator;
+        // check if unit is in FoV
+        if (gmap->isInFov(unit->m_x, unit->m_y) ) {
+            unit->render(); // retrieve the unit pointer
+        }
+
     }
 }

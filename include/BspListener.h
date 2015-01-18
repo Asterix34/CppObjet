@@ -8,12 +8,12 @@ class BspListener : public ITCODBspCallback // interface
     public:
         BspListener(Map &gmap);
         virtual ~BspListener();
-        int roomNum; // room number // here for DEBUG
+
         bool visitNode(TCODBsp *node, void *userData);
     protected:
     private:
         Map &gmap; // a map to dig
-
+        int roomNum; // room number
         int lastX, lastY; // center of the last room
 };
 

@@ -14,15 +14,16 @@ BspListener::~BspListener()
 
 bool BspListener::visitNode(TCODBsp *node, void *userData) {
     if (node->isLeaf()) { // oh look a composite
+        // dig a room
         int x, y, w, h; // coords and size
         TCODRandom *rng = TCODRandom::getInstance();
-        w = rng->getInt(ROOM_MINH_SIZE, node->w-2); // get random size
-        h = rng->getInt(ROOM_MINV_SIZE, node->w-2); // from min to generated
+        w = rng->getInt(ROOM_MIN_SIZE, node->w-2); // get random size
+        h = rng->getInt(ROOM_MIN_SIZE, node->w-2); // from min to generated
         x = rng->getInt(node->x+1, node->x + node->w - w-1); // get random pos
         y = rng->getInt(node->y+1, node->y + node->h - h-1); // from pos to max
 
         // now make a room
-        gmap.createRoom(x, y, x+w-1, y+h-1, roomNum==0, roomNum);
+        gmap.createRoom(x, y, x+w-1, y+h-1, roomNum==0);
 
         // if it's not the first room, we need a corridor
         if ( roomNum ) { // if >0 then true

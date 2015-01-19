@@ -30,6 +30,7 @@ class Map
 
         // FOV management
         bool isInFov(int x, int y) const;
+        bool isInFovAndRange(int x, int y, float maxRange) const;
         bool isExplored(int x, int y) const;
         void computeFov();
 

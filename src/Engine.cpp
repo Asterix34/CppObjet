@@ -117,3 +117,41 @@ Unit *Engine::getClosestMonster(int x, int y, float range) const {
     }
     return closest;
 }
+
+bool Engine::pickATile(int *x, int *y, float maxRange) {
+    // we need a new game loop to pick a tile
+    while ( !TCODConsole::isWindowClosed() ) {
+        render();
+        // highlight every tile in range
+        for (int cx; cx < gmap->width; cx++) {
+            for (int cy=0; cy < gmap->height; cy++) {
+                if ( gmap->isInFovAndRange(cx, cy, maxRange) ) {
+                    TCODColor color = TCODConsole::root->getCharBackground(cx, cy);
+                    color = color * 1.2f; // we pick and change the color
+                    TCODConsole::root->setCharBackground(cx, cy, color);
+                }
+            }
+        }
+        // listen to mouse
+        TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS|TCOD_EVENT_MOUSE,
+                &lastKey, &mouse);
+
+        // now let's fill the tile under cursor with withe
+        if ( gmap->isInFovAndRange(mouse.cx, mouse.cy, maxRange ) ) {
+            TCODConsole::root->setCharBackground(mouse.cx, mouse.cy, TCODColor::white);
+            // listen to cursor while tile is valid (remember this is in a super fast loop
+            if ( mouse.lbutton_pressed ) {
+                *x=mouse.cx;
+                *y=mouse.cy;
+                return true;
+            }
+        }
+        // listen to right click to quit - or key press
+        if (mouse.rbutton_pressed || lastKey.vk != TCODK_NONE ) {
+            return false;
+        }
+        // flush the console screen
+        TCODConsole::flush();
+    }
+    return false;
+}

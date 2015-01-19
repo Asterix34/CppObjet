@@ -64,8 +64,18 @@ bool Map::isInFov(int x, int y) const {
         return false;
 
     if ( tmap->isInFov(x, y) ) {
-        tiles[x + y*width].explored = true;
+        tiles[x + y*width].explored = true; // is this still useful ?
         return true;
+    }
+    return false;
+}
+
+// check if a node is in Fov and in range (0 = no limit)
+bool Map::isInFovAndRange(int x, int y, float maxRange) const {
+    if (isInFov(x, y)) {
+        if( maxRange == 0 || engine.player->getDistance(x, y) <= maxRange ) {
+            return true;
+        }
     }
     return false;
 }
@@ -182,16 +192,22 @@ void Map::addItem(int x, int y) {
     int dice = rng->getInt(0, 100);
     Unit *item;
 
-    if ( dice < 70 ) {
+    if ( dice < 50 ) { // 50%
         // create health potion
         item = new Unit(x, y, '!', TCODColor::violet, "Health Potion");
         item->blockMovement = false;
         item->pickable = new Healer(10);
-    } else {
+    } else if ( dice < 50+20 ) { // 20%
         // create lightning scroll
         item = new Unit(x, y, '#', TCODColor::lightBlue, "Scroll of Lightning Bolt");
         item->blockMovement = false;
         item->pickable = new LightningBolt(5,20);
+    }
+    else if ( dice < 50+20+20 ) { // 20%
+        // create lightning scroll
+        item = new Unit(x, y, '#', TCODColor::orange, "Scroll of Fireball");
+        item->blockMovement = false;
+        item->pickable = new Fireball(5,20);
     }
     engine.units.push(item);
 }

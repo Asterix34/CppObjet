@@ -26,7 +26,9 @@ class Engine
 
         void sendToBack(Unit *unit);
 
-        Unit *getClosestMonster(int x, int y, float range) const;
+        // combat helper
+        Unit *getClosestMonster(int x, int y, float range) const; // with scroll of lightning
+        bool pickATile(int *x, int *y, float maxRange = 0.0f); // with scroll of fireball
     protected:
     private:
         bool computeFov; // expensive ressource wise so do it only when player moves

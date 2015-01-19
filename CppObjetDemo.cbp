@@ -42,34 +42,26 @@
 			<Add directory="include" />
 		</Compiler>
 		<Unit filename="include/Ai.h" />
-		<Unit filename="include/Arme.h" />
 		<Unit filename="include/Attacker.h" />
 		<Unit filename="include/BspListener.h" />
-		<Unit filename="include/Coffre.h" />
+		<Unit filename="include/Container.h" />
 		<Unit filename="include/Destructible.h" />
 		<Unit filename="include/Engine.h" />
-		<Unit filename="include/Guerrier.h" />
-		<Unit filename="include/Mage.h" />
+		<Unit filename="include/Gui.h" />
 		<Unit filename="include/Map.h" />
-		<Unit filename="include/Objet.h" />
-		<Unit filename="include/Personnage.h" />
-		<Unit filename="include/Potion.h" />
+		<Unit filename="include/Pickable.h" />
 		<Unit filename="include/Unit.h" />
 		<Unit filename="include/main.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Ai.cpp" />
-		<Unit filename="src/Arme.cpp" />
 		<Unit filename="src/Attacker.cpp" />
 		<Unit filename="src/BspListener.cpp" />
-		<Unit filename="src/Coffre.cpp" />
+		<Unit filename="src/Container.cpp" />
 		<Unit filename="src/Destructible.cpp" />
 		<Unit filename="src/Engine.cpp" />
-		<Unit filename="src/Guerrier.cpp" />
-		<Unit filename="src/Mage.cpp" />
+		<Unit filename="src/Gui.cpp" />
 		<Unit filename="src/Map.cpp" />
-		<Unit filename="src/Objet.cpp" />
-		<Unit filename="src/Personnage.cpp" />
-		<Unit filename="src/Potion.cpp" />
+		<Unit filename="src/Pickable.cpp" />
 		<Unit filename="src/Unit.cpp" />
 		<Extensions>
 			<code_completion />

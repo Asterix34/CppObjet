@@ -16,6 +16,7 @@ class Pickable
     private:
 };
 
+/* potions */
 class Healer : public Pickable
 {
     public:
@@ -29,6 +30,7 @@ class Healer : public Pickable
     private:
 };
 
+/* scrolls */
 class LightningBolt : public Pickable {
     public:
         float range, damage;
@@ -36,5 +38,10 @@ class LightningBolt : public Pickable {
         bool use(Unit *owner, Unit *wearer);
 };
 
+class Fireball : public LightningBolt { // a fireball who inherits a lightning bolt will own the shit man -- an enthousiast developer
+    public:
+        Fireball(float range, float damage);
+        bool use(Unit *owner, Unit *wearer);
+};
 
 #endif // PICKABLE_H

@@ -12,7 +12,7 @@ Map::Map(int width, int height) : width(width), height(height)
 
     // start generation - (TCODRandom *randomizer, int nb, int minHSize,
     //                      int minVSize, float maxHRatio, float maxVRatio);
-    bsp.splitRecursive(NULL, 16, ROOM_MAX_SIZE, ROOM_MAX_SIZE, 1.5f, 1.5f);
+    bsp.splitRecursive(NULL, 4, ROOM_MIN_SIZE, ROOM_MIN_SIZE, 1.0f, 1.0f);
 
     // create a listener
     BspListener listener(*this);
@@ -104,7 +104,13 @@ void Map::render() const {
                 TCODConsole::root->setCharBackground(x, y,
                     isWall(x, y) ? darkWall : darkGround
                 );
-            } // else ?
+            } // no else to hide the rest of the map
+            // debug
+            else if ( disableFoV ) {
+                TCODConsole::root->setCharBackground(x, y,
+                    isWall(x, y) ? darkWall : darkGround
+                );
+            }
 
         }
 
@@ -133,7 +139,7 @@ void Map::dig(int x1, int y1, int x2, int y2) {
 }
 
 // now create a room with mechanics (units)
-void Map::createRoom(int x1, int y1, int x2, int y2, bool first) {
+void Map::createRoom(int x1, int y1, int x2, int y2, bool first, int sizeMult) {
     dig(x1, y1, x2, y2);
     if ( first ) {
         // spawn player in first room
@@ -142,7 +148,7 @@ void Map::createRoom(int x1, int y1, int x2, int y2, bool first) {
     } else {
         // we use random lib from TCOD
         TCODRandom *rng = TCODRandom::getInstance(); // oh look a singleton
-        int nbMonsters = rng->getInt(0, ROOM_MAX_MONSTERS);
+        int nbMonsters = rng->getInt(0, ROOM_MAX_MONSTERS * sizeMult);
         while ( nbMonsters > 0) {
             int x = rng->getInt(x1, x2);
             int y = rng->getInt(y1, y2);
@@ -153,7 +159,7 @@ void Map::createRoom(int x1, int y1, int x2, int y2, bool first) {
         }
 
         // add items
-        int nbItems=rng->getInt(0,ROOM_MAX_ITEMS);
+        int nbItems=rng->getInt(0,ROOM_MAX_ITEMS * sizeMult);
         while (nbItems > 0) {
             int x=rng->getInt(x1,x2);
             int y=rng->getInt(y1,y2);

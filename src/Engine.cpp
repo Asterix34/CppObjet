@@ -19,7 +19,7 @@ Engine::Engine(int screenWidth, int screenHeight) :
     units.push(player);
 
     // allocate new map and the gui
-    gmap = new Map(80, 45);
+    gmap = new Map(screenWidth, screenHeight-7);
     gui = new Gui();
 
     gui->message(TCODColor::white,

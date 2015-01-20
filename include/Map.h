@@ -5,6 +5,7 @@
 
 // some const
 const int ROOM_MIN_SIZE = 6;
+const int EMPTY_MAX_SIZE = 4;
 const int ROOM_MAX_SIZE = 10;
 const int ROOM_MAX_MONSTERS = 3;
 const int ROOM_MAX_ITEMS = 2;
@@ -46,7 +47,7 @@ class Map
         TCODMap *tmap; // we now use TCODMap from framework (handles more)
 
         void dig(int x1, int y1, int x2, int y2); // can dig rooms
-        void createRoom(int x1, int y1, int x2, int y2, bool first);
+        void createRoom(int x1, int y1, int x2, int y2, bool first, int sizeMult = 1);
 
         // BSP is Binary Space Partition, it generate tree like a dungeon with rooms
         friend class BspListener;

@@ -24,6 +24,10 @@ Destructible::~Destructible()
     //dtor
 }
 
+bool Destructible::isDead() const {
+    return m_hp <= 0;
+}
+
 float Destructible::takeDamage(Unit *owner, float damage) {
     damage -= m_defense; // defense reducts incoming damage
     if (damage > 0) {

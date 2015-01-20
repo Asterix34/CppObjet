@@ -14,7 +14,7 @@ class Destructible
         Destructible(float maxHp, float defense, const char *corpseName);
         virtual ~Destructible();
 
-        inline bool isDead() const { return m_hp <= 0; }
+        bool isDead() const;
         // health management
         float takeDamage(Unit *owner, float damage);
         float heal(float amount);

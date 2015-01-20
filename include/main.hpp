@@ -1,6 +1,8 @@
 #ifndef MAIN_HPP_INCLUDED
 #define MAIN_HPP_INCLUDED
 
+/* debug */
+const bool disableFoV = true;
 
 #include "libtcod.hpp"
 // so to let it compile we need to inform the compiler a class Unit will exist

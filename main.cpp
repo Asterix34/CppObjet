@@ -8,8 +8,6 @@ using namespace std;
 // global engine (called as extern in Engine.h)
 Engine engine(80, 50); // width, height
 
-
-
 int main() {
     // game loop
     while ( !TCODConsole::isWindowClosed() ) {

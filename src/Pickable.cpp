@@ -101,7 +101,7 @@ bool Fireball::use(Unit *owner, Unit *wearer) {
         if ( unit->destructible && !unit->destructible->isDead()
                 && unit->getDistance(x, y) <= range ) {
             // message conception fail, either the number of dmg is wrong,
-            // either my cavader gets dmg, i need a method to return mitigated dmg
+            // either my cadaver gets dmg, i need a method to return mitigated dmg
             engine.gui->message(TCODColor::orange,
                 "The %s gets burnt for %g hit points.", unit->m_name, damage);
             unit->destructible->takeDamage(unit, damage);

@@ -1,7 +1,6 @@
 #include "Gui.h"
 #include <cstdarg>
 
-
 // for bars
 static const int PANEL_HEIGHT=7;
 static const int BAR_WIDTH=20;
@@ -135,6 +134,12 @@ void Gui::message(const TCODColor &color, const char *text, ...) {
 
 
 void Gui::renderMouseLook() {
+    con->setDefaultForeground(TCODColor::red);
+    char coords[7] = "";
+    sprintf(coords, "%d,%d", engine.mouse.cx, engine.mouse.cy);
+    con->print(50,0,coords);
+
+
     if ( !engine.gmap->isInFov( engine.mouse.cx, engine.mouse.cy ))
         return;
 
